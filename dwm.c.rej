@@ -1,11 +1,27 @@
---- dwm.c	2019-01-15 19:59:21.363468198 +0100
-+++ dwm.c	2015-11-08 23:39:37.000000000 +0100
-@@ -720,7 +720,7 @@ drawbar(Monitor *m)
- 		w = TEXTW(tags[i]);
- 		drw_setscheme(drw, m->tagset[m->seltags] & 1 << i ? &scheme[SchemeSel] : &scheme[SchemeNorm]);
- 		drw_text(drw, x, 0, w, bh, tags[i], urg & 1 << i);
--		drw_rect(drw, x + 1, 1, dx, dx, m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-+		drw_rect(drw, x + dx, 0, w - ( 2 * dx + 1 ), dx / 2, m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
- 		           occ & 1 << i, urg & 1 << i);
- 		x += w;
- 	}
+--- dwm.c
++++ dwm.c
+@@ -1696,16 +1709,16 @@ tile(Monitor *m)
+ 	if (n > m->nmaster)
+ 		mw = m->nmaster ? m->ww * m->mfact : 0;
+ 	else
+-		mw = m->ww;
+-	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
++		mw = m->ww - m->gappx;
++	for (i = 0, my = ty = m->gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+ 		if (i < m->nmaster) {
+-			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
+-			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
+-			my += HEIGHT(c);
++			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gappx;
++			resize(c, m->wx + m->gappx, m->wy + my, mw - (2*c->bw) - m->gappx, h - (2*c->bw), 0);
++			my += HEIGHT(c) + m->gappx;
+ 		} else {
+-			h = (m->wh - ty) / (n - i);
+-			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
+-			ty += HEIGHT(c);
++			h = (m->wh - ty) / (n - i) - m->gappx;
++			resize(c, m->wx + mw + m->gappx, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappx, h - (2*c->bw), 0);
++			ty += HEIGHT(c) + m->gappx;
+ 		}
+ }
+ 
