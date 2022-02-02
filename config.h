@@ -5,8 +5,8 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Roboto:size=12" , "JoyPixels:pixelsize=16:antialias=true:autohint=true"    };
-static const char dmenufont[]       = "Roboto:size=12";
+static const char *fonts[]          =  {"DejaVuSansMono Nerd Font:size=14" , "Iosevka:size=12"};
+static const char dmenufont[]       = "DejaVuSansMono Nerd Font:size=14";
 //static const char col_gray1[]       = "#222222";
 //static const char col_gray2[]       = "#444444";
 //static const char col_gray3[]       = "#bbbbbb";
@@ -19,7 +19,7 @@ static const char dmenufont[]       = "Roboto:size=12";
 //};
 #include "/home/knight/.cache/wal/colors-wal-dwm.h"
 /* tagging */
-static const char *tags[] = { "🏠","📁", "🧰", "📟", "⚙️"};
+static const char *tags[] = { "","", "", "", ""};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -39,9 +39,9 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "🪟",      tile },    /* first entry is default */
-	{ "🎞️",      NULL },    /* no layout function means floating behavior */
-	{ "🖼️",      monocle },
+	{ "",      tile },    /* first entry is default */
+	{ "",      NULL },    /* no layout function means floating behavior */
+	{ "",      monocle },
 };
 #include "shiftview.c"
 /* key definitions */
@@ -58,7 +58,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb",norm_bg, "-nf",norm_fg, "-sb",sel_bg, "-sf",sel_fg, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -97,9 +97,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
-};
-
+  };
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
